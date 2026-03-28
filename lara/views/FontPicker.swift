@@ -98,8 +98,6 @@ struct FontPicker: View {
                     }
                 } header: {
                     Text("Fonts")
-                } footer: {
-                    Text("Currently, only Comic Sans MS and SFUI work")
                 }
             }
             .navigationTitle("Font Overwrite")
