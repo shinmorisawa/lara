@@ -17,7 +17,7 @@ If lara doesnt work on your device, and you want to help the project, please als
 
 ### coming soon:
 - MobileGestalt Editor
-- 3 App Bypass
+- File Manager (Full Disk r/w)
 
 ## credits:
 - opa334 for the kernel exploit poc, ChOma and XPF
