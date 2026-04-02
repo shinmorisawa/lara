@@ -2,7 +2,7 @@
 a beautiful kexploit.
 
 ## support
-lara will at its absolute best only ever support versions up to iOS 26.0.1/iOS 18.7.2. the exploit was patched after those versions.
+lara will at its absolute best only ever support versions up to iOS 26.0.1/iOS 18.7.1. the exploit was patched after those versions.
 
 Currently tested on iOS 17.2.1 - 26.0.1.
 If you run lara on your device, and it ends up working, please contact me on [discord](https://discord.com/users/919268666305024010) (@roooot.dev) and tell me:
