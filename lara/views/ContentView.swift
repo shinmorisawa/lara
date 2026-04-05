@@ -10,12 +10,12 @@ import UniformTypeIdentifiers
 
 struct ContentView: View {
     @AppStorage("showfmintabs") private var showfmintabs: Bool = true
-    @AppStorage("selectedmethod") private var selectedmethod: method = .vfs
     @ObservedObject private var mgr = laramgr.shared
     @State private var uid: uid_t = getuid()
     @State private var pid: pid_t = getpid()
     @State private var hasoffsets = haskernproc()
     @State private var showsettings = false
+    @State private var selectedmethod: method = .sbx
     
     var body: some View {
         NavigationStack {
@@ -285,6 +285,19 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showsettings) {
             SettingsView(hasoffsets: $hasoffsets)
+        }
+        .onAppear {
+            refreshSelectedMethod()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UserDefaults.didChangeNotification)) { _ in
+            refreshSelectedMethod()
+        }
+    }
+
+    private func refreshSelectedMethod() {
+        if let raw = UserDefaults.standard.string(forKey: "selectedmethod"),
+           let m = method(rawValue: raw) {
+            selectedmethod = m
         }
     }
 }

@@ -15,7 +15,7 @@ struct SettingsView: View {
     @AppStorage("loggernobullshit") private var loggernobullshit: Bool = true
     @AppStorage("keepalive") private var iskeepalive: Bool = true
     @AppStorage("showfmintabs") private var showfmintabs: Bool = true
-    @AppStorage("selectedmethod") private var selectedmethod: method = .vfs
+    @AppStorage("selectedmethod") private var selectedmethod: method = .sbx
     
     var appname: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
@@ -70,7 +70,11 @@ struct SettingsView: View {
                 } header: {
                     Text("Method")
                 } footer: {
-                    Text("etas0n™?")
+                    if selectedmethod == .vfs {
+                        Text("Dont use this. It sucks.")
+                    } else {
+                        Text("This is the better method. Use this")
+                    }
                 }
                 
                 Section {

@@ -42,12 +42,12 @@ struct WhitelistView: View {
                             Text("Refresh")
                         }
                     }
-                    .disabled(!mgr.vfsready || patching)
+                    .disabled(!mgr.sbxready || patching)
 
                     Button("Patch (Empty Plist)") {
                         patchall()
                     }
-                    .disabled(!mgr.vfsready || patching)
+                    .disabled(!mgr.sbxready || patching)
                 } header: {
                     Text("Actions")
                 } footer: {
@@ -78,7 +78,7 @@ struct WhitelistView: View {
                 Text(status ?? "")
             }
             .onAppear {
-                if mgr.vfsready {
+                if mgr.sbxready {
                     loadall()
                 }
             }
@@ -86,11 +86,15 @@ struct WhitelistView: View {
     }
 
     private func loadall() {
+        guard mgr.sbxready else {
+            status = "sandbox escape not ready"
+            return
+        }
         patching = true
         defer { patching = false }
         var next: [String: String] = [:]
         for f in files {
-            guard let data = mgr.vfsread(path: f.path, maxSize: 2 * 1024 * 1024) else {
+            guard let data = sbxread(path: f.path, maxSize: 2 * 1024 * 1024) else {
                 next[f.path] = "(failed to read)"
                 continue
             }
@@ -100,6 +104,10 @@ struct WhitelistView: View {
     }
 
     private func patchall() {
+        guard mgr.sbxready else {
+            status = "sandbox escape not ready"
+            return
+        }
         patching = true
         defer { patching = false }
 
@@ -116,7 +124,7 @@ struct WhitelistView: View {
 
         var failures: [String] = []
         for f in files {
-            let ok = mgr.vfsoverwritewithdata(target: f.path, data: data)
+            let ok = sbxwrite(path: f.path, data: data)
             if !ok { failures.append(f.name) }
         }
 
@@ -127,6 +135,29 @@ struct WhitelistView: View {
         }
 
         loadall()
+    }
+
+    private func sbxread(path: String, maxSize: Int) -> Data? {
+        do {
+            let url = URL(fileURLWithPath: path)
+            let data = try Data(contentsOf: url, options: .mappedIfSafe)
+            if data.count > maxSize {
+                return data.prefix(maxSize)
+            }
+            return data
+        } catch {
+            return nil
+        }
+    }
+
+    private func sbxwrite(path: String, data: Data) -> Bool {
+        do {
+            let url = URL(fileURLWithPath: path)
+            try data.write(to: url, options: .atomic)
+            return true
+        } catch {
+            return false
+        }
     }
 
     private func render(data: Data) -> String {
@@ -148,4 +179,3 @@ struct WhitelistView: View {
         return hex
     }
 }
-
