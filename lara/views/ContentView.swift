@@ -314,6 +314,10 @@ struct ContentView: View {
                                     CustomView(mgr: mgr)
                                 }
                                 
+                                NavigationLink("MobileGestalt") {
+                                    EditorView()
+                                }
+                                
                                 NavigationLink("Whitelist") {
                                     WhitelistView()
                                 }
@@ -323,10 +327,6 @@ struct ContentView: View {
                                 }
                                 
                                 if 1 == 2 {
-                                    NavigationLink("MobileGestalt") {
-                                        EditorView()
-                                    }
-                                    
                                     NavigationLink("Passcode Theme") {
                                         PasscodeView(mgr: mgr)
                                     }

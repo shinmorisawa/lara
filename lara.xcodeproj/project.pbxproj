@@ -42,6 +42,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				other/media.xcassets,
 			);
 			target = CC1C8B382F71DF9C00206982 /* lara */;
 		};

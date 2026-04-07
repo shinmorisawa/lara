@@ -55,6 +55,18 @@ struct ToolsView: View {
                 Text("Address Space Layout Randomization. Turning it on may break lara.")
             }
             
+            
+            if 1 == 2 {
+                Section {
+                    NavigationLink("LaraJIT") {
+                        JitView()
+                    }
+                    .disabled(!mgr.sbxready)
+                } header: {
+                    Text("Tools")
+                }
+            }
+            
             Section {
                 Button {
                     killproc("springboard")
