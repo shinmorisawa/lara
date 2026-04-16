@@ -74,8 +74,10 @@ If lara doesnt work on your device, and you want to help the project, please als
 - downloading OTA updates does not work.
 - dirtyzero does not work.
 - ui is buggy on 17.x
-- doesnt work on ipad m2?
+- doesnt work on ipad m1-m4?
 - kernelcache download broken for some versions.
+
+
 
 ## installation:
 <a href="https://celloserenity.github.io/altdirect/?url=https://raw.githubusercontent.com/rooootdev/lara/refs/heads/main/source.json" target="_blank">
