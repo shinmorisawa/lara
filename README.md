@@ -75,9 +75,24 @@ If lara doesnt work on your device, and you want to help the project, please als
 - dirtyzero does not work.
 - ui is buggy on 17.x
 - doesnt work on ipad m1-m4?
-- kernelcache download broken for some versions.
+- .aea ota updates do not work.
 
-
+### fixes:
+kernelcache download fix:
+1. Download the IPSW tool for your device
+[here](https://github.com/blacktop/ipsw/releases/tag/v3.1.671).
+2. Extract the archive.
+3. Open Terminal.
+4. Navigate to the extracted folder:<br>
+`cd /path/to/ipsw_3.1.671_macOS_universal/`
+5. Extract the kernel:
+./ipsw extract --kernel <drag your ipsw here>
+6. Get the kernelcache file.
+7. Transfer the kernelcache to your iPhone.
+8. In the Files app:
+   - Go to "On My iPhone" > "lara"
+   - Place the kernelcache file there.
+9. Rename the file to "kernelcache" (without extension).
 
 ## installation:
 <a href="https://celloserenity.github.io/altdirect/?url=https://raw.githubusercontent.com/rooootdev/lara/refs/heads/main/source.json" target="_blank">
