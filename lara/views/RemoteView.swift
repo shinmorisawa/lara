@@ -244,7 +244,7 @@ struct RemoteView: View {
                         .autocorrectionDisabled()
                         .lineLimit(1)
                     
-                    TextEditor("Arguments", text: $customArgsText)
+                    TextEditor(text: $customArgsText)
                         .font(.system(.body, design: .monospaced))
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
@@ -263,6 +263,12 @@ struct RemoteView: View {
                 }
 
                 Toggle("MIG filter bypass", isOn: $customMigBypass)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Args (comma/space separated; dec, 0xhex, or -1)")
+                        .foregroundColor(.secondary)
+                        .font(.footnote)
+                }
 
                 Button {
                     run("Custom RemoteCall \(customProcessName):\(customFunctionName)") {
@@ -315,10 +321,10 @@ struct RemoteView: View {
                 } label: {
                     Text("Call")
                 }
-                
+
                 if !customLastResult.isEmpty {
                     Text(customLastResult)
-                        .monospaced()
+                        .font(.system(.footnote, design: .monospaced))
                         .foregroundColor(.secondary)
                         .textSelection(.enabled)
                 }
